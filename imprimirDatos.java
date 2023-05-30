@@ -2,6 +2,7 @@ import funciones.funcionPadre;
 import util.derivada;
 
 import javax.swing.*;
+import java.util.function.Function;
 
 public class imprimirDatos {
     Double valorVv;
@@ -248,6 +249,30 @@ public class imprimirDatos {
         diferenci5Puntos(f,x0+h,h);
 
     }
+    public void calcularSegundaDerivada(Function<Double,Double> f, Double x0, Double h){
+        diferencias_numericas metodos = new diferencias_numericas();
+        Double de=metodos.calcularSegundaDerivada(f,x0,h);
+     JOptionPane.showMessageDialog(null,"La segunda derivada numerica es "+de+"\nmediante el metodo de 5 puntos");
+    }
+    public void calcularTerceraDerivada(Function<Double,Double> f, Double x0, Double h){
+        diferencias_numericas metodos = new diferencias_numericas();
+        Double de=metodos.calcularTerceraDerivada(f,x0,h);
+        JOptionPane.showMessageDialog(null,"La tercera derivada numerica es "+de+"\nmediante el metodo de 5 puntos");
+    }
+
+    public void calcularCuartaDerivada(Function<Double,Double> f, Double x0, Double h){
+        diferencias_numericas metodos = new diferencias_numericas();
+        Double de=metodos.calcularCuartaDerivada(f,x0,h);
+        JOptionPane.showMessageDialog(null,"La cuarta derivada numerica es "+de+"\nmediante el metodo de 5 puntos");
+    }
+
+    public void Richardson(Function<Double,Double> f, Double x0, Double h,int nivel){
+        diferencias_numericas metodos = new diferencias_numericas();
+        double aproximacion = metodos.Richardson(f, x0, h, nivel);
+       JOptionPane.showMessageDialog(null,"La aproximación de nivel " + nivel + " en el punto " + x0 + " es: " + aproximacion);
+    }
+
+
 
 
 

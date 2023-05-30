@@ -17,11 +17,20 @@ public class Main {
         colecion.valorVv = -0.2;
         colecion.diferencia3Puntos(DatosF,2.0,1.0);*/
 
-        f96 funcio9=new f96();
-/*      colecion.diferenciaCentradas(funcio9,0.5,0.1);*/
+        f96 funcio9 = new f96();
+        colecion.valorVv = (Math.PI / 2);
+/*        colecion.diferenci5Puntos(funcio9, (Math.PI / 2), 0.1);
+        colecion.diferencia3Puntos(funcio9, (Math.PI / 2), 0.1);*/
 
+/*        colecion.calcularSegundaDerivada(x-> funcio9.f(x), colecion.valorVv, 0.1);
+        colecion.calcularTerceraDerivada(x-> funcio9.f(x),colecion.valorVv,0.1);
+        colecion.calcularCuartaDerivada(x->funcio9.f(x),colecion.valorVv,0.1);*/
 
-
+       colecion.Richardson(x-> funcio9.f(x),Math.PI,Math.PI/2,10);
 
     }
+
+
 }
+
+

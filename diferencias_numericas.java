@@ -1,5 +1,7 @@
 import funciones.funcionPadre;
 
+import java.util.function.Function;
+
 public class diferencias_numericas {
 
     public Double primeraDiferenciaHaciaDelante(Double x0, Double h, funcionPadre f) {
@@ -77,5 +79,45 @@ public class diferencias_numericas {
         return Math.abs(Ev / VV);
     }
 
+    public  Double calcularSegundaDerivada(Function<Double, Double> f, double x, double h) {
+        Double f_x_plus_h = f.apply(x + h);
+        Double f_x = f.apply(x);
+        Double f_x_minus_h = f.apply(x - h);
+        return (f_x_plus_h - 2 * f_x + f_x_minus_h) / (h * h);
+    }
+    public  Double calcularTerceraDerivada(Function<Double, Double> f, double x, double h) {
+        Double f_x_minus_2h = f.apply(x - 2 * h);
+        Double f_x_minus_h = f.apply(x - h);
+        Double f_x = f.apply(x);
+        Double f_x_plus_h = f.apply(x + h);
+        Double f_x_plus_2h = f.apply(x + 2 * h);
+        return (f_x_minus_2h - 2 * f_x_minus_h + 2 * f_x_plus_h - f_x_plus_2h) / (h * h * h);
+    }
 
+    public Double calcularCuartaDerivada(Function<Double, Double> f, double x, double h) {
+        Double f_x_plus_2h = f.apply(x + 2 * h);
+        Double f_x_plus_h = f.apply(x + h);
+        Double f_x = f.apply(x);
+        Double f_x_minus_h = f.apply(x - h);
+        Double f_x_minus_2h = f.apply(x - 2 * h);
+        return (f_x_minus_2h - 4 * f_x_minus_h + 6 * f_x - 4 * f_x_plus_h + f_x_plus_2h) / (h * h * h * h);
+    }
+
+
+    public Double Richardson(Function<Double, Double> f, double x, double h, int nivel) {
+        Double[][] tabla = new Double[nivel + 1][nivel + 1];
+
+        tabla[0][0] = (f.apply(x + h) - f.apply(x - h)) / (2 * h);
+
+        for (int i = 1; i <= nivel; i++) {
+            h /= 2;
+            tabla[i][0] = (f.apply(x + h) - f.apply(x - h)) / (2 * h);
+
+            for (int j = 1; j <= i; j++) {
+                tabla[i][j] = tabla[i][j-1] + (tabla[i][j-1] - tabla[i-1][j-1]) / (Math.pow(4, j) - 1);
+            }
+        }
+
+        return tabla[nivel][nivel];
+    }
 }
